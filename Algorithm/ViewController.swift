@@ -11,9 +11,12 @@ class ViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        let data: [Int] = [5,4,2,6,1,3,7,9,0,8]
-        let array = quickSort(array: data, left: 0, right: data.count - 1)
-        print(array)
+        var data: [Int] = [5,4,2,6,1,3,7,9,0,8]
+//        let data: [Int] = [4,3,2,1]
+//        let array = quickSort(array: data, left: 0, right: data.count - 1)
+//        let array = insertSort(array: data)
+        insertSort(array: &data)
+        print(data)
     }
 }
 
@@ -51,4 +54,39 @@ func quickSort(array: [Int], left: Int, right: Int) -> Array<Int> {
         return rightSortedArr
     }
     return array
+}
+
+//插入排序
+func insertSort(array: [Int]) -> Array<Int> {
+    var result = array
+    for i in 1..<result.count {
+        let temp = result[i]
+        var index: Int? = nil
+        for j in (0..<i).reversed() {
+            if result[j] > temp {
+                result[j + 1] = result[j]//往后移一位
+                index = j
+            }
+        }
+        if index != nil {
+            result[index!] = temp
+        }
+    }
+    return result
+}
+
+func insertSort(array: inout [Int]){
+    for i in 1..<array.count {
+        let temp = array[i]
+        var index: Int? = nil
+        for j in (0..<i).reversed() {
+            if array[j] > temp {
+                array[j + 1] = array[j]//往后移一位
+                index = j
+            }
+        }
+        if index != nil {
+            array[index!] = temp
+        }
+    }
 }
