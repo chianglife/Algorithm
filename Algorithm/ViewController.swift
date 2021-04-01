@@ -17,7 +17,7 @@ class ViewController: UIViewController {
 //        let array = quickSort(array: data, left: 0, right: data.count - 1)
 //        let array = insertSort(array: data)
 //        insertSort(array: &data)
-        shellSort(array: &data)
+        selectSort(array: &data)
         print(data)
     }
 }
@@ -45,6 +45,7 @@ func division(array: [Int], left: Int, right: Int) -> (left: Int, right: Int, ar
     return (left, right, array)
 }
 
+//快速排序
 func quickSort(array: [Int], left: Int, right: Int) -> Array<Int> {
     if left < right {
         let sort = division(array: array, left: left, right: right)
@@ -93,7 +94,7 @@ func insertSort(array: inout [Int]){//关键字inout
     }
 }
 
-//shell sort 希尔排序
+//希尔排序
 //待排数列 87654321 步长为n/2
 // 8 7 6 5      4 3 2 1
 //          >>
@@ -131,3 +132,20 @@ func shellSort(array: inout [Int]) {
         print(array)
     }
 }
+
+//简单选择排序
+/*
+    i 比较基数 0 ~ n-2
+    p i + 1 ~ n - 1
+ */
+
+func selectSort(array: inout [Int]) {
+    for i in (0..<array.count - 1) {
+        for j in ((i + 1)..<array.count) {
+            if array[j] < array[i] {
+                array.swapAt(j, i)
+            }
+        }
+    }
+}
+
